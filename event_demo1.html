@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .inout {
+            width: 800px;
+            height: 800px;
+            border: brown 1px solid;
+            position: relative;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .window {
+            width: 200px;
+            height: 200px;
+            background-color: blueviolet;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="inout">
+        <div class="window">
+
+        </div>
+    </div>
+
+    <script>
+        var div = document.querySelector(".window");
+
+        div.onmousedown = function (ev) {
+            var divrelleft = div.offsetLeft;
+            var divreltop = div.offsetTop;
+            var browser_x = ev.clientX;
+            var browser_y = ev.clientY;
+
+            var ox = browser_x - divrelleft;
+            var oy = browser_y - divreltop;
+        
+            document.onmousemove = function (ev1) {
+                var ox1 = ev1.clientX;
+                var oy1 = ev1.clientY;
+
+                var ox_relative = ox1 - ox;
+                var oy_relative = oy1 - oy;
+
+                div.style.left = ox_relative + "px";
+                div.style.top = oy_relative + "px";
+
+                ev1.preventDefault();
+
+
+            }
+
+
+            document.onmouseup = function (ev2) {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
